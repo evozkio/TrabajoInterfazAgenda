@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AgendaController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="Nuevo" mnemonicParsing="false" onAction="#actionNuevo" text="New" />
+               <MenuItem fx:id="Open" mnemonicParsing="false" onAction="#actionOpen" text="Open..." />
+              <MenuItem fx:id="Save" mnemonicParsing="false" onAction="#actionSave" text="Save" />
+              <MenuItem fx:id="SaveAs" mnemonicParsing="false" onAction="#actionSaveAs" text="Save As..." />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Find" />
+              <MenuItem fx:id="SizeDefault" mnemonicParsing="false" onAction="#actionSizeDefault" text="Size Default" />
+                  <Menu mnemonicParsing="false" text="Size +/-">
+                    <items>
+                      <MenuItem fx:id="Size1" mnemonicParsing="false" onAction="#actionSize1" text="x1.5" />
+                      <MenuItem fx:id="Size2" mnemonicParsing="false" onAction="#actionSize2" text="x2" />
+                      <MenuItem fx:id="Size3" mnemonicParsing="false" onAction="#actionSize3" text="x2.5" />
+                    </items>
+                  </Menu>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="About" mnemonicParsing="false" onAction="#actionAbout" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TableView fx:id="table" layoutY="27.0" prefHeight="375.0" prefWidth="201.0">
+        <columns>
+          <TableColumn fx:id="CFirstName" prefWidth="100.0" text="First Name" />
+          <TableColumn fx:id="CLastName" prefWidth="100.0" text="Last Name" />
+        </columns>
+      </TableView>
+      <GridPane layoutX="200.0" layoutY="27.0" prefHeight="300.0" prefWidth="401.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="119.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="296.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="325.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="325.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="325.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="325.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="325.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="325.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Person Details" />
+            <Label text="First Name:" GridPane.rowIndex="1" />
+            <Label text="Street:" GridPane.rowIndex="3" />
+            <Label text="City:" GridPane.rowIndex="4" />
+            <Label text="Postal Code:" GridPane.rowIndex="5" />
+            <Label text="Birthday:" GridPane.rowIndex="6" />
+            <Label text="Phone:" GridPane.rowIndex="7" />
+            <Label text="Last Name:" GridPane.rowIndex="2" />
+            <Label fx:id="DFirstName" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="DLastName" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="DStreet" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="DCity" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="DPostalCode" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="DBirthday" text="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="DPhone" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </padding>
+      </GridPane>
+      <HBox alignment="CENTER" layoutX="371.0" layoutY="361.0" prefHeight="25.0" prefWidth="215.0" spacing="10.0">
+         <children>
+            <Button fx:id="ButtonNew" mnemonicParsing="false" onAction="#actionNew" prefHeight="25.0" prefWidth="65.0" text="New ..." />
+            <Button fx:id="ButtonEdit" mnemonicParsing="false" onAction="#actionEdit" prefHeight="25.0" prefWidth="65.0" text="Edit ..." />
+            <Button fx:id="ButtonDelete" mnemonicParsing="false" onAction="#actionDelete" prefHeight="25.0" prefWidth="65.0" text="Delete" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </children>
+</AnchorPane>
