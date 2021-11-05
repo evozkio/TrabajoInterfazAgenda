@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -116,9 +117,8 @@ public class AgendaController implements Initializable{
 	
 	@FXML
 	private void actionDelete(ActionEvent event) {
-		Personas selectedItem = table.getSelectionModel().getSelectedItem();
-	    table.getItems().remove(selectedItem);
-		
+		ObservableList<Personas> selectedItem = table.getSelectionModel().getSelectedItems();
+		table.getItems().removeAll(selectedItem);	
 	}
 	
 	@FXML
@@ -235,6 +235,7 @@ public class AgendaController implements Initializable{
 
         personas = FXCollections.observableArrayList();
         table.setItems(personas);
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 	
 	@Override
