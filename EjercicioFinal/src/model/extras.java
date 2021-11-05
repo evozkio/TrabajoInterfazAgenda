@@ -44,7 +44,7 @@ public class extras {
 		return ancho;
 	}
 	
-	public static void saveAs(ObservableList<Personas> personas, String ubicado) throws IOException {
+	public static void saveAs(ObservableList<Personas> personas) throws IOException {
 		FileChooser fileChooser = new FileChooser();
 		Stage stage = new Stage();
 		ruta = fileChooser.showSaveDialog(stage);
@@ -60,18 +60,20 @@ public class extras {
 	}
 	
 	public static void save(ObservableList<Personas> personas) throws IOException {
-	    FileOutputStream fileout = new FileOutputStream(ruta,false); 
-	    ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
-		
-		
-		for (Personas persona : personas) {
-			dataOS.writeObject(persona);
+		if (ruta != null) {
+			 FileOutputStream fileout = new FileOutputStream(ruta,false); 
+			 ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
+			 for (Personas persona : personas) {
+					dataOS.writeObject(persona);
+				}
+				dataOS.close();
 		}
-		dataOS.close();
-		
+		else {
+			saveAs(personas);
+		}	
 	}
 	
-	public static ArrayList<Personas> open(String ubicado) throws IOException, ClassNotFoundException {
+	public static ArrayList<Personas> open() throws IOException, ClassNotFoundException {
 		FileChooser fileChooser = new FileChooser();
 		Stage stage = new Stage();
 		File fichero = fileChooser.showOpenDialog(stage);

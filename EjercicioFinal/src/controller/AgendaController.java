@@ -46,20 +46,6 @@ public class AgendaController implements Initializable{
 	public final static int Nphone =9;
 	
 	@FXML 	private AnchorPane panel;
-
-	@FXML	private Button ButtonNew;
-	@FXML	private Button ButtonEdit;
-	@FXML	private Button ButtonDelete;
-	
-	@FXML 	private MenuItem SizeDefault;
-	@FXML	private MenuItem Size1;
-	@FXML	private MenuItem Size2;
-	@FXML	private MenuItem Size3;
-	@FXML	private MenuItem Nuevo;
-	@FXML	private MenuItem Open;
-	@FXML	private MenuItem Save;
-	@FXML	private MenuItem SaveAs;
-	@FXML	private MenuItem About;
 	
 	@FXML	private Label DFirstName;
 	@FXML	private Label DLastName;
@@ -153,7 +139,7 @@ public class AgendaController implements Initializable{
 		personas.clear();
 		table.getItems().clear();
 		
-		ArrayList<Personas> listapersona = extras.open("C:\\Users\\Evozkio\\fichPersona.dat");
+		ArrayList<Personas> listapersona = extras.open();
 		for (Personas persona : listapersona) {
 			personas.add(persona);
 		}
@@ -166,7 +152,7 @@ public class AgendaController implements Initializable{
 	
 	@FXML
 	private void actionSaveAs(ActionEvent event) throws IOException {
-		extras.saveAs(personas, "C:\\Users\\Evozkio\\fichPersona.dat");
+		extras.saveAs(personas);
 	}
 	
 	@FXML
