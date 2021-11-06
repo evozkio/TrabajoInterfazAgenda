@@ -34,6 +34,7 @@ public class AgendaController implements Initializable{
 	public static ObservableList<Personas> personas;
 	public static Personas personaModificar;
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+	public static boolean tipo = false;
 	
 	public final static int NfirstName =20;
 	public final static int NlastName =20;
@@ -60,6 +61,7 @@ public class AgendaController implements Initializable{
 	
 	@FXML
 	private void actionNew(ActionEvent event) throws IOException {
+		tipo = false;
 		crearVentana("/vista/nuevo.fxml", "Agenda");
 	}
 	
@@ -67,7 +69,8 @@ public class AgendaController implements Initializable{
 	private void actionEdit(ActionEvent event) throws IOException {
 		personaModificar = table.getSelectionModel().getSelectedItem();
 		if(personaModificar != null) {
-			crearVentana("/vista/modificar.fxml", "Agenda");
+			tipo = true;
+			crearVentana("/vista/nuevo.fxml", "Agenda");
 		}
 	}
 	
