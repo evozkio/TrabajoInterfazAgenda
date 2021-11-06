@@ -9,7 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+import java.util.List;
+
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
@@ -67,6 +70,43 @@ public class extras {
 		}	
 	}
 	
+	public static ArrayList<Personas> compararlistas(List<Personas> personas) throws Exception{
+		ArrayList<Personas> listapersona = open();
+		ArrayList<Personas> nuevaspersonas = new ArrayList<Personas>() ;
+		for (Personas persona : listapersona) {
+			if(compararpersona(personas, persona)) {
+				nuevaspersonas.add(persona);				
+			}
+		}
+		return nuevaspersonas;
+	}
+	
+	public static Boolean compararpersona (List<Personas> personas,Personas persona) {
+		Boolean validar = true;
+		for (Personas persona1 : personas) {
+			if (persona1.equals(persona)){
+				validar = false;
+				break;
+			}	
+		}
+		return validar;	
+	}
+	
+	public static boolean compararpersona(List<Personas> personas, Personas persona, int posicion) {
+		Boolean validar = true;
+		for (int i = 0; i < personas.size(); i++) {
+			if(i==posicion) {
+				continue;
+			}
+			if(personas.get(i).equals(persona)) {
+				validar = false;
+				break;
+			}
+			
+		}
+		return validar;	
+	}
+	
 	private static void escrituraFile(ObservableList<Personas> personas)throws IOException {
 		 FileOutputStream fileout = new FileOutputStream(ruta,false); 
 		 ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
@@ -103,5 +143,16 @@ public class extras {
 		}
 		return personas;
 	}
+	
+	public static void ventanaError(String mensaje) {
+		Alert alerta = new Alert(Alert.AlertType.WARNING);
+		
+		alerta.setTitle("Warning Dialog");
+		alerta.setHeaderText(null);
+		alerta.setContentText(mensaje);
+		alerta.showAndWait();
+	}
+
+
 	
 }

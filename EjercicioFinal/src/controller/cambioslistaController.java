@@ -43,7 +43,10 @@ public class cambioslistaController implements Initializable{
 	private void actionAdd(ActionEvent event) {
 		
 		Personas persona = new Personas();
-		Alert alerta = new Alert(Alert.AlertType.WARNING);
+		int posicion = -1;
+		if(AgendaController.tipo) {
+			posicion = AgendaController.posicionPersonaEnTabla;
+		}
 		
 		if(!(boxFirstName.getText().equals("")|| boxLastName.getText().equals("") || boxStreet.getText().equals("") 
 			|| boxCity.getText().equals("") || boxPostalCode.getText().equals("") || boxPhone.getText().equals("")
@@ -58,27 +61,33 @@ public class cambioslistaController implements Initializable{
 			persona.setBirthday(boxBirthday.getValue());
 			if(boxCodPhone.getText()!="")
 				persona.setCodphone(Integer.parseInt(boxCodPhone.getText()));
-			if(AgendaController.tipo){
-				AgendaController.personas.set(AgendaController.posicionPersonaEnTabla,persona);				
-			}
+			if(extras.compararpersona(AgendaController.personas, persona,posicion))
+				if(AgendaController.tipo){
+					AgendaController.personas.set(posicion,persona);
+					cerrar();
+				}
+				else {
+					AgendaController.personas.add(persona);
+					cerrar();
+				}
 			else {
-				AgendaController.personas.add(persona);				
+				extras.ventanaError("No se puede añadir porque existe su nombre y apellido o su numero telefono o ambas");
 			}
-			Stage stage = (Stage) this.ButtonAdd.getScene().getWindow();
-			stage.close();
 		}
 		else {
-			alerta.setTitle("Warning Dialog");
-			alerta.setHeaderText(null);
-			alerta.setContentText("No puede haber ningun campo vacio");
-			alerta.showAndWait();
+			extras.ventanaError("No puede haber ningun campo vacio");
 		}
 	
+	}
+
+	
+	private void cerrar() {
+		Stage stage = (Stage) this.ButtonAdd.getScene().getWindow();
+		stage.close();
 	}
 	
 	@FXML
 	private void actionExit(ActionEvent event) {
-//		extras.cambiarVentana(extras.escala.getX(),this.panel);
 		Stage stage = (Stage) this.ButtonExit.getScene().getWindow();
 		stage.close();
 	}

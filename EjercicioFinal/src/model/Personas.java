@@ -105,7 +105,7 @@ public class Personas implements Serializable{
     public boolean equals(Object obj) {
         if (obj instanceof Personas) {
         	Personas nueva = (Personas) obj;
-            if((this.firstName.equals(nueva.firstName)&& this.lastName.equals(nueva.lastName))) {
+            if((this.firstName.equals(nueva.firstName)&& this.lastName.equals(nueva.lastName)) || this.toStringcodmasPhone().equals(nueva.toStringcodmasPhone())) {
             	return true;
             }
         }

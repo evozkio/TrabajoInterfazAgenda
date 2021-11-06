@@ -130,27 +130,13 @@ public class AgendaController implements Initializable{
 		table.getItems().clear();
 		
 		ArrayList<Personas> listapersona = extras.open();
-		for (Personas persona : listapersona) {
-			personas.add(persona);
-		}
+		personas.addAll(listapersona);
+		
 	}
 	@FXML
 	private void actionAddF(ActionEvent event) throws Exception {
-		ArrayList<Personas> listapersona = extras.open();
-		ArrayList<Personas> nuevaspersonas = new ArrayList<Personas>() ;
-		for (Personas persona : listapersona) {
-			Boolean validar = true;
-			for (Personas persona1 : personas) {
-				if (persona1.equals(persona)){
-					validar = false;
-					break;
-				}
-				
-			}
-			if(validar) {
-				nuevaspersonas.add(persona);				
-			}
-		}
+		ArrayList<Personas> nuevaspersonas = new ArrayList<>();
+		extras.compararlistas(personas)
 		personas.addAll(nuevaspersonas);
 	}
 	
