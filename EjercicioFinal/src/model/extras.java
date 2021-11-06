@@ -47,30 +47,33 @@ public class extras {
 	public static void saveAs(ObservableList<Personas> personas) throws IOException {
 		FileChooser fileChooser = new FileChooser();
 		Stage stage = new Stage();
-		ruta = fileChooser.showSaveDialog(stage);
-		
-	    FileOutputStream fileout = new FileOutputStream(ruta,false); 
-	    ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
-		
-		
-		for (Personas persona : personas) {
-			dataOS.writeObject(persona);
+		try {
+			ruta = fileChooser.showSaveDialog(stage);
+			
+			escrituraFile(personas);
+			
+		} catch (NullPointerException e) {
+			System.out.println("No se guardado");
 		}
-		dataOS.close();
+		
 	}
 	
-	public static void save(ObservableList<Personas> personas) throws IOException {
+	public static void save(ObservableList<Personas> personas) throws IOException{
 		if (ruta != null) {
-			 FileOutputStream fileout = new FileOutputStream(ruta,false); 
-			 ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
-			 for (Personas persona : personas) {
-					dataOS.writeObject(persona);
-				}
-				dataOS.close();
+			escrituraFile(personas);
 		}
 		else {
 			saveAs(personas);
 		}	
+	}
+	
+	private static void escrituraFile(ObservableList<Personas> personas)throws IOException {
+		 FileOutputStream fileout = new FileOutputStream(ruta,false); 
+		 ObjectOutputStream dataOS = new ObjectOutputStream(fileout);
+		 for (Personas persona : personas) {
+				dataOS.writeObject(persona);
+			}
+			dataOS.close();
 	}
 	
 	public static ArrayList<Personas> open() throws IOException, ClassNotFoundException {

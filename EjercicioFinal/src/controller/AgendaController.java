@@ -16,9 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -62,43 +60,32 @@ public class AgendaController implements Initializable{
 	
 	@FXML
 	private void actionNew(ActionEvent event) throws IOException {
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/nuevo.fxml"));
-		
-		Stage stage = new Stage();
-		Pane root = loader.load();
-		
-	
-		Scene scene = new Scene(root);
-		stage.initModality(Modality.APPLICATION_MODAL);
-
-		
-		stage.setScene(scene);
-		stage.showAndWait();
-		stage.setTitle("Agenda");
+		crearVentana("/vista/nuevo.fxml", "Agenda");
 	}
 	
 	@FXML
 	private void actionEdit(ActionEvent event) throws IOException {
 		personaModificar = table.getSelectionModel().getSelectedItem();
-		
 		if(personaModificar != null) {
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/modificar.fxml"));
-			
-			Stage stage = new Stage();
-			Pane root = loader.load();
-			
-			Scene scene = new Scene(root);
-			
-			
-			stage.initModality(Modality.APPLICATION_MODAL);
-			
-			
-			stage.setScene(scene);
-			stage.showAndWait();
-			stage.setTitle("Agenda");
+			crearVentana("/vista/modificar.fxml", "Agenda");
 		}
+	}
+	
+	private void crearVentana(String vista,String Titulo) throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
+		
+		Stage stage = new Stage();
+		Pane root = loader.load();
+		
+		Scene scene = new Scene(root);
+		
+		stage.initModality(Modality.APPLICATION_MODAL);
+		
+		
+		stage.setScene(scene);
+		stage.showAndWait();
+		stage.setTitle(Titulo);
 	}
 	
 	@FXML
@@ -262,21 +249,5 @@ public class AgendaController implements Initializable{
         	   }
            }
        });
-     
-
-  }
-	
-	
-	
-	
-	
-
-	
-	
-
-	
-	
-
-	
-
+	}
 }
