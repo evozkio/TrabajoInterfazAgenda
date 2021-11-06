@@ -76,32 +76,32 @@ public class extras {
 			dataOS.close();
 	}
 	
-	public static ArrayList<Personas> open() throws IOException, ClassNotFoundException {
+	public static ArrayList<Personas> open() throws IOException, ClassNotFoundException  {
 		FileChooser fileChooser = new FileChooser();
 		Stage stage = new Stage();
 		File fichero = fileChooser.showOpenDialog(stage);
+		Personas aux = new Personas();
 		
 		ArrayList<Personas> personas = new ArrayList<Personas>();
-		ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(fichero));
-		Personas aux = new Personas();
-
 		try {
+			ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(fichero));	
 			aux = (Personas) dataIS.readObject();
 			while (aux != null) {
 				personas.add(aux);
 				aux = (Personas) dataIS.readObject();
 			}
-		} catch (EOFException eo) {
-			System.out.println("FIN DE LECTURA.");
-		} catch (StreamCorruptedException x) {
+			dataIS.close();
+			ruta = fichero.getAbsoluteFile();
+			
+		} catch (NullPointerException e) {
+			System.out.println("No has abierto nada");
 		}
-		ruta = fichero.getAbsoluteFile();
-		dataIS.close();
+		catch (EOFException eo) {
+			System.out.println("FIN DE LECTURA.");
+		} 
+		catch (StreamCorruptedException x) {
+		}
 		return personas;
 	}
 	
-	public static ObservableList<Personas> add(ObservableList<Personas> personas) {
-		
-		return personas;
-	}
 }

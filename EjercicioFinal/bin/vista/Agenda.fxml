@@ -15,6 +15,7 @@
                <MenuItem fx:id="Open" mnemonicParsing="false" onAction="#actionOpen" text="Open..." />
               <MenuItem fx:id="Save" mnemonicParsing="false" onAction="#actionSave" text="Save" />
               <MenuItem fx:id="SaveAs" mnemonicParsing="false" onAction="#actionSaveAs" text="Save As..." />
+                  <MenuItem fx:id="AddF" mnemonicParsing="false" onAction="#actionAddF" text="Add..." />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

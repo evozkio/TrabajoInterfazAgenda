@@ -100,6 +100,17 @@ public class Personas implements Serializable{
 	public String toStringPostalCode() {
 		return String.valueOf(postalCode);
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Personas) {
+        	Personas nueva = (Personas) obj;
+            if((this.firstName.equals(nueva.firstName)&& this.lastName.equals(nueva.lastName))) {
+            	return true;
+            }
+        }
+        return false;
+    }
 
 	
 

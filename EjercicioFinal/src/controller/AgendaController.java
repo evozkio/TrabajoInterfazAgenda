@@ -134,6 +134,25 @@ public class AgendaController implements Initializable{
 			personas.add(persona);
 		}
 	}
+	@FXML
+	private void actionAddF(ActionEvent event) throws Exception {
+		ArrayList<Personas> listapersona = extras.open();
+		ArrayList<Personas> nuevaspersonas = new ArrayList<Personas>() ;
+		for (Personas persona : listapersona) {
+			Boolean validar = true;
+			for (Personas persona1 : personas) {
+				if (persona1.equals(persona)){
+					validar = false;
+					break;
+				}
+				
+			}
+			if(validar) {
+				nuevaspersonas.add(persona);				
+			}
+		}
+		personas.addAll(nuevaspersonas);
+	}
 	
 	@FXML
 	private void actionSave(ActionEvent event) throws IOException {
@@ -144,6 +163,7 @@ public class AgendaController implements Initializable{
 	private void actionSaveAs(ActionEvent event) throws IOException {
 		extras.saveAs(personas);
 	}
+	
 	
 	@FXML
 	private void actionAbout(ActionEvent event) {

@@ -78,9 +78,9 @@ public class cambioslistaController implements Initializable{
 	
 	@FXML
 	private void actionExit(ActionEvent event) {
-		extras.cambiarVentana(extras.escala.getX(),this.panel);
-//		Stage stage = (Stage) this.ButtonExit.getScene().getWindow();
-//		stage.close();
+//		extras.cambiarVentana(extras.escala.getX(),this.panel);
+		Stage stage = (Stage) this.ButtonExit.getScene().getWindow();
+		stage.close();
 	}
 
 	@Override
