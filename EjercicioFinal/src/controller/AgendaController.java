@@ -31,18 +31,13 @@ import model.extras;
 
 public class AgendaController implements Initializable{
 	
+	public static int posicionPersonaEnTabla;
 	public static ObservableList<Personas> personas;
 	public static Personas personaModificar;
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 	public static boolean tipo = false;
 	
-	public final static int NfirstName =20;
-	public final static int NlastName =20;
-	public final static int Nstreet =20;
-	public final static int Ncity =20;
-	public final static int NpostalCode =5;
-	public final static int Ncodphone =2;
-	public final static int Nphone =9;
+	
 	
 	@FXML 	private AnchorPane panel;
 	
@@ -57,7 +52,6 @@ public class AgendaController implements Initializable{
 	@FXML	private TableView<Personas> table;
 	@FXML	private TableColumn<Personas, String> CFirstName;
 	@FXML	private TableColumn<Personas, String> CLastName;
-	public static int posicionPersonaEnTabla;
 	
 	@FXML
 	private void actionNew(ActionEvent event) throws IOException {
@@ -125,19 +119,20 @@ public class AgendaController implements Initializable{
 	
 	
 	@FXML
-	private void actionOpen(ActionEvent event) throws Exception {
-		personas.clear();
-		table.getItems().clear();
-		
+	private void actionOpen(ActionEvent event) throws Exception {	
 		ArrayList<Personas> listapersona = extras.open();
-		personas.addAll(listapersona);
-		
+		if (listapersona.size() != 0) {		
+			personas.clear();
+			table.getItems().clear();
+			personas.addAll(listapersona);
+		}		
 	}
 	@FXML
 	private void actionAddF(ActionEvent event) throws Exception {
-		ArrayList<Personas> nuevaspersonas = new ArrayList<>();
-		extras.compararlistas(personas)
-		personas.addAll(nuevaspersonas);
+		ArrayList<Personas> nuevaspersonas = extras.compararlistas(personas);
+		for (Personas personas : nuevaspersonas) {
+			System.out.println(personas.getFirstName());
+		}
 	}
 	
 	@FXML
@@ -218,6 +213,10 @@ public class AgendaController implements Initializable{
         personas = FXCollections.observableArrayList();
         table.setItems(personas);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
+        final ObservableList<Personas> tablaPersonaSel = table.getSelectionModel().getSelectedItems();
+	    tablaPersonaSel.addListener(selectorTablaPersonas);
+	
     }
 	
 	@Override
@@ -225,38 +224,8 @@ public class AgendaController implements Initializable{
 		
 		inicializarTablaPersonas();
 		
-		final ObservableList<Personas> tablaPersonaSel = table.getSelectionModel().getSelectedItems();
-	    tablaPersonaSel.addListener(selectorTablaPersonas);
-	
+		
 		
 	}
 	
-	public static void fijarTextFiel(final TextField campoTexto, final int tamanoMaximo, final Boolean numero) {
-
-        campoTexto.lengthProperty().addListener(new ChangeListener<Number>() {
-
-           @Override
-           public void changed(ObservableValue<? extends Number> observable,
-                   Number valorAnterior, Number valorActual) {
-        	   Boolean validador = true;
-        	   if (numero) {
-        		   try {
-        			   Integer.parseInt(campoTexto.getText());
-					
-        		   } catch (NumberFormatException e) {
-        			   if (valorActual.intValue() > valorAnterior.intValue())
-        				   campoTexto.setText(campoTexto.getText().substring(0, valorAnterior.intValue()));
-        			   validador = false;
-        		   }
-        	   }
-        	   if(validador) {
-	               if (valorActual.intValue() > valorAnterior.intValue()) {
-	                   if (campoTexto.getText().length() >= tamanoMaximo) {
-	                       campoTexto.setText(campoTexto.getText().substring(0, tamanoMaximo));
-	                   }
-	               }
-        	   }
-           }
-       });
-	}
 }

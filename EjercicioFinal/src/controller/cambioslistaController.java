@@ -19,8 +19,7 @@ import model.extras;
 
 public class cambioslistaController implements Initializable{
 	
-	
-	private Personas personaM = new Personas();
+
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 	
 	@FXML 	private GridPane panel; 
@@ -48,19 +47,19 @@ public class cambioslistaController implements Initializable{
 			posicion = AgendaController.posicionPersonaEnTabla;
 		}
 		
-		if(!(boxFirstName.getText().equals("")|| boxLastName.getText().equals("") || boxStreet.getText().equals("") 
-			|| boxCity.getText().equals("") || boxPostalCode.getText().equals("") || boxPhone.getText().equals("")
-			)) 
+		persona.setFirstName(boxFirstName.getText());
+		persona.setLastName(boxLastName.getText());
+		persona.setStreet(boxStreet.getText());
+		persona.setCity(boxCity.getText());
+		persona.setPostalCode(Integer.parseInt(boxPostalCode.getText()));
+		persona.setPhone(Integer.parseInt(boxPhone.getText()));
+		persona.setBirthday(boxBirthday.getValue());
+		if(boxCodPhone.getText()!="") persona.setCodphone(Integer.parseInt(boxCodPhone.getText()));
+
+		
+		if(persona.validarcampos())
 		{
-			persona.setFirstName(boxFirstName.getText());
-			persona.setLastName(boxLastName.getText());
-			persona.setStreet(boxStreet.getText());
-			persona.setCity(boxCity.getText());
-			persona.setPostalCode(Integer.parseInt(boxPostalCode.getText()));
-			persona.setPhone(Integer.parseInt(boxPhone.getText()));
-			persona.setBirthday(boxBirthday.getValue());
-			if(boxCodPhone.getText()!="")
-				persona.setCodphone(Integer.parseInt(boxCodPhone.getText()));
+			
 			if(extras.compararpersona(AgendaController.personas, persona,posicion))
 				if(AgendaController.tipo){
 					AgendaController.personas.set(posicion,persona);
@@ -75,7 +74,7 @@ public class cambioslistaController implements Initializable{
 			}
 		}
 		else {
-			extras.ventanaError("No puede haber ningun campo vacio");
+			extras.ventanaError("Tienes  campos mal rellenados");
 		}
 	
 	}
@@ -94,11 +93,20 @@ public class cambioslistaController implements Initializable{
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		int NfirstName =20;
+		int NlastName =20;
+		int Nstreet =20;
+		int Ncity =20;
+		int NpostalCode =5;
+		int Ncodphone =2;
+		int Nphone =9;
+		
+		Personas personaM = new Personas();
 
 		if(AgendaController.tipo) {
 			ButtonAdd.setText("Edit");
 			boxBirthday.setConverter(new LocalDateStringConverter(formatter, null));
-			personaM = AgendaController.personaModificar;
+			personaM = AgendaController.personas.get(AgendaController.posicionPersonaEnTabla);
 			boxFirstName.setText(personaM.getFirstName());
 			boxLastName.setText(personaM.getLastName());
 			boxStreet.setText(personaM.getStreet());
@@ -108,13 +116,13 @@ public class cambioslistaController implements Initializable{
 			boxPhone.setText(personaM.toStringPhone());
 			boxBirthday.setValue(personaM.getBirthday());	
 		}
-		AgendaController.fijarTextFiel(boxFirstName, AgendaController.NfirstName,false);
-		AgendaController.fijarTextFiel(boxLastName, AgendaController.NlastName,false);
-		AgendaController.fijarTextFiel(boxStreet, AgendaController.Nstreet,false);
-		AgendaController.fijarTextFiel(boxCity, AgendaController.Ncity,false);
-		AgendaController.fijarTextFiel(boxPostalCode, AgendaController.NpostalCode,true);
-		AgendaController.fijarTextFiel(boxCodPhone, AgendaController.Ncodphone,true);
-		AgendaController.fijarTextFiel(boxPhone, AgendaController.Nphone,true);
+		extras.fijarTextFiel(boxFirstName,NfirstName,false);
+		extras.fijarTextFiel(boxLastName, NlastName,false);
+		extras.fijarTextFiel(boxStreet, Nstreet,false);
+		extras.fijarTextFiel(boxCity, Ncity,false);
+		extras.fijarTextFiel(boxPostalCode,NpostalCode,true);
+		extras.fijarTextFiel(boxCodPhone, Ncodphone,true);
+		extras.fijarTextFiel(boxPhone, Nphone,true);
 		
 	}
 

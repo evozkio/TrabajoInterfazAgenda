@@ -111,6 +111,16 @@ public class Personas implements Serializable{
         }
         return false;
     }
+	
+	public Boolean validarcampos() {
+		Boolean validar = true; 
+		
+		if (this.firstName == ""|| this.lastName == "" || this.street == "" || this.city == "" || this.postalCode < 5 || this.birthday == null || this.toStringPhone().length() < 9) {
+			validar = false;
+		}
+		
+		return validar;
+	}
 
 	
 

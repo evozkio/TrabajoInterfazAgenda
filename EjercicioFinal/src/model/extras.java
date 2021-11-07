@@ -11,8 +11,11 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.stage.FileChooser;
@@ -77,7 +80,7 @@ public class extras {
 			if(compararpersona(personas, persona)) {
 				nuevaspersonas.add(persona);				
 			}
-		}
+		}		
 		return nuevaspersonas;
 	}
 	
@@ -151,6 +154,35 @@ public class extras {
 		alerta.setHeaderText(null);
 		alerta.setContentText(mensaje);
 		alerta.showAndWait();
+	}
+	
+	public static void fijarTextFiel(final TextField campoTexto, final int tamanoMaximo, final Boolean numero) {
+
+        campoTexto.lengthProperty().addListener(new ChangeListener<Number>() {
+
+           @Override
+           public void changed(ObservableValue<? extends Number> observable,
+                   Number valorAnterior, Number valorActual) {
+        	   Boolean validador = true;
+        	   if (numero) {
+        		   try {
+        			   Integer.parseInt(campoTexto.getText());
+					
+        		   } catch (NumberFormatException e) {
+        			   if (valorActual.intValue() > valorAnterior.intValue())
+        				   campoTexto.setText(campoTexto.getText().substring(0, valorAnterior.intValue()));
+        			   validador = false;
+        		   }
+        	   }
+        	   if(validador) {
+	               if (valorActual.intValue() > valorAnterior.intValue()) {
+	                   if (campoTexto.getText().length() >= tamanoMaximo) {
+	                       campoTexto.setText(campoTexto.getText().substring(0, tamanoMaximo));
+	                   }
+	               }
+        	   }
+           }
+       });
 	}
 
 
