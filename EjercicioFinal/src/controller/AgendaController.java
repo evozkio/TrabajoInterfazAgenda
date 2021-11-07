@@ -68,22 +68,7 @@ public class AgendaController implements Initializable{
 		}
 	}
 	
-	private void crearVentana(String vista,String Titulo) throws IOException {
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
-		
-		Stage stage = new Stage();
-		Pane root = loader.load();
-		
-		Scene scene = new Scene(root);
-		
-		stage.initModality(Modality.APPLICATION_MODAL);
-		
-		
-		stage.setScene(scene);
-		stage.showAndWait();
-		stage.setTitle(Titulo);
-	}
+	
 	
 	@FXML
 	private void actionDelete(ActionEvent event) {
@@ -143,6 +128,11 @@ public class AgendaController implements Initializable{
 	@FXML
 	private void actionSaveAs(ActionEvent event) throws IOException {
 		extras.saveAs(personas);
+	}
+	
+	@FXML
+	private void actionFind(ActionEvent event) throws IOException {
+		crearVentana("/vista/buscador.fxml", "Agenda");
 	}
 	
 	
@@ -225,5 +215,22 @@ public class AgendaController implements Initializable{
 		inicializarTablaPersonas();
 		
 	}
+	
+	private void crearVentana(String vista,String Titulo) throws IOException {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
+			
+			Stage stage = new Stage();
+			Pane root = loader.load();
+			
+			Scene scene = new Scene(root);
+			
+			stage.initModality(Modality.APPLICATION_MODAL);
+			
+			
+			stage.setScene(scene);
+			stage.showAndWait();
+			stage.setTitle(Titulo);
+		}
 	
 }
