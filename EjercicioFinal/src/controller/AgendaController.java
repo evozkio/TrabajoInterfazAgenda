@@ -56,7 +56,7 @@ public class AgendaController implements Initializable{
 	@FXML
 	private void actionNew(ActionEvent event) throws IOException {
 		tipo = false;
-		crearVentana("/vista/nuevo.fxml", "Agenda");
+		crearVentana("/vista/cambioslista.fxml", "Agenda");
 	}
 	
 	@FXML
@@ -64,7 +64,7 @@ public class AgendaController implements Initializable{
 		personaModificar = table.getSelectionModel().getSelectedItem();
 		if(personaModificar != null) {
 			tipo = true;
-			crearVentana("/vista/nuevo.fxml", "Agenda");
+			crearVentana("/vista/cambioslista.fxml", "Agenda");
 		}
 	}
 	
@@ -223,8 +223,6 @@ public class AgendaController implements Initializable{
 	public void initialize(URL url, ResourceBundle rb) {
 		
 		inicializarTablaPersonas();
-		
-		
 		
 	}
 	
