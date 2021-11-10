@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<GridPane fx:id="panel" hgap="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="183.0" prefWidth="314.0" vgap="12.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.optionController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="161.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="486.0" minWidth="10.0" prefWidth="142.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="486.0" minWidth="10.0" prefWidth="96.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="178.0" minHeight="0.0" prefHeight="39.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="267.0" minHeight="4.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="344.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="344.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="344.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="Type letter" />
+      <CheckBox mnemonicParsing="false" text="Underline" GridPane.rowIndex="1" />
+      <CheckBox mnemonicParsing="false" text="Italic" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <CheckBox mnemonicParsing="false" text="Bold" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
+      <ColorPicker fx:id="colorLetter" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ColorPicker GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="Color letter" GridPane.rowIndex="2" />
+      <Label text="Background" GridPane.rowIndex="3" />
+      <Button fx:id="ok" mnemonicParsing="false" onAction="#actionOk" prefHeight="25.0" prefWidth="65.0" text="Ok" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Exit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+   </padding>
+</GridPane>

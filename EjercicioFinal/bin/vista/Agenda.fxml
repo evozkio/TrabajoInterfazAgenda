@@ -34,11 +34,12 @@
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="About" mnemonicParsing="false" onAction="#actionAbout" text="About" />
+                  <MenuItem fx:id="Option" mnemonicParsing="false" onAction="#actionOption" text="Option" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="table" layoutY="27.0" prefHeight="375.0" prefWidth="201.0">
+      <TableView fx:id="table" layoutY="27.0" prefHeight="373.0" prefWidth="201.0">
         <columns>
           <TableColumn fx:id="CFirstName" prefWidth="100.0" text="First Name" />
           <TableColumn fx:id="CLastName" prefWidth="100.0" text="Last Name" />

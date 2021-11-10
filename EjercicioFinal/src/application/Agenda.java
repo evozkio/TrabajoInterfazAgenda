@@ -26,7 +26,7 @@ public class Agenda extends Application{
 				
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
-//		stage.setResizable(false);
+		stage.setResizable(false);
 		stage.setTitle("Agenda");
 		stage.show();
 	}

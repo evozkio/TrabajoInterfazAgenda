@@ -49,14 +49,17 @@ public class AgendaController implements Initializable{
 	@FXML	private Label DBirthday;
 	@FXML	private Label DPhone;
 	
-	@FXML	private TableView<Personas> table;
+
+	@FXML   public TableView<Personas> table;
 	@FXML	private TableColumn<Personas, String> CFirstName;
 	@FXML	private TableColumn<Personas, String> CLastName;
 	
 	@FXML
 	private void actionNew(ActionEvent event) throws IOException {
 		tipo = false;
-		crearVentana("/vista/cambioslista.fxml", "Agenda");
+		crearVentana("/vista/cambioslista.fxml", "Agenda",true);
+		
+	
 	}
 	
 	@FXML
@@ -64,8 +67,9 @@ public class AgendaController implements Initializable{
 		personaModificar = table.getSelectionModel().getSelectedItem();
 		if(personaModificar != null) {
 			tipo = true;
-			crearVentana("/vista/cambioslista.fxml", "Agenda");
+			crearVentana("/vista/cambioslista.fxml", "Agenda",true);
 		}
+		
 	}
 	
 	
@@ -121,6 +125,11 @@ public class AgendaController implements Initializable{
 	}
 	
 	@FXML
+	private void actionOption(ActionEvent event) throws Exception {
+		crearVentana("/vista/Option.fxml", "Agenda",true);
+	}
+	
+	@FXML
 	private void actionSave(ActionEvent event) throws IOException {
 		extras.save(personas);
 	}
@@ -132,7 +141,7 @@ public class AgendaController implements Initializable{
 	
 	@FXML
 	private void actionFind(ActionEvent event) throws IOException {
-		crearVentana("/vista/buscador.fxml", "Agenda");
+		crearVentana("/vista/buscador.fxml", "Agenda",false);
 	}
 	
 	
@@ -216,7 +225,7 @@ public class AgendaController implements Initializable{
 		
 	}
 	
-	private void crearVentana(String vista,String Titulo) throws IOException {
+	private void crearVentana(String vista,String Titulo,Boolean bloqueo) throws IOException {
 			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(vista));
 			
@@ -224,7 +233,7 @@ public class AgendaController implements Initializable{
 			Pane root = loader.load();
 			
 			Scene scene = new Scene(root);
-			
+			if(bloqueo)
 			stage.initModality(Modality.APPLICATION_MODAL);
 			
 			

@@ -2,6 +2,9 @@ package controller;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -36,16 +39,46 @@ public class buscadorController implements Initializable{
 	@FXML 	private TextField boxCodPhone;
 	@FXML 	private TextField boxPhone;
 	@FXML 	private DatePicker boxBirthday;
+
+	private int valor = 0;
 	
 
 	
 	@FXML
 	private void actionNext(ActionEvent event) {
-	
+		
+		for (int i = this.valor ; i < AgendaController.personas.size(); i++) {
+			if (compararpersona(i,AgendaController.personas)) {
+				AgendaController.table.requestFocus();
+				AgendaController.table.getSelectionModel().clearSelection();
+				AgendaController.table.getSelectionModel().select(i);
+				AgendaController.table.getFocusModel().focus(i);
+				valor = i;
+				break;
+				
+			}
+		}
+		
+		
+		
 	}
 	
+	
+
 	@FXML
 	private void actionBefore(ActionEvent event) {
+		
+		for (int i = this.valor ; i <= 0; i--) {
+			if (compararpersona(i,AgendaController.personas)) {
+				AgendaController.table.requestFocus();
+				AgendaController.table.getSelectionModel().clearSelection();
+				AgendaController.table.getSelectionModel().select(i);
+				AgendaController.table.getFocusModel().focus(i);
+				this.valor = i;
+				break;
+				
+			}
+		}
 	
 	}
 
@@ -74,6 +107,35 @@ public class buscadorController implements Initializable{
 		extras.fijarTextFiel(boxCodPhone, Ncodphone,true);
 		extras.fijarTextFiel(boxPhone, Nphone,true);
 		
+	}
+	
+	private boolean compararpersona(int posicion, List<Personas> personas) {
+		Boolean validador  =false;
+		if(!(boxFirstName.getText().equals("")))
+			if(boxFirstName.getText().equals(personas.get(posicion).getFirstName())) validador = true;
+			else validador = false;
+		if(!(boxLastName.getText().equals("")))
+			if(boxLastName.getText().equals(personas.get(posicion).getLastName())) validador = true;
+			else validador = false;
+		if(!(boxStreet.getText().equals("")))
+			if(boxStreet.getText().equals(personas.get(posicion).getStreet())) validador = true;
+			else validador = false;
+		if(!(boxCity.getText().equals("")))
+			if(boxCity.getText().equals(personas.get(posicion).getCity())) validador = true;
+			else validador = false;
+		if(!(boxPostalCode.getText().equals("")))
+			if(boxPostalCode.getText().equals(String.valueOf(personas.get(posicion).getPostalCode()))) validador = true;
+			else validador = false;
+		if(!(boxCodPhone.getText().equals("")))
+			if(boxCodPhone.getText().equals(String.valueOf(personas.get(posicion).getCodphone()))) validador = true;
+			else validador = false;
+		if(!(boxPhone.getText().equals("")))
+			if(boxPhone.getText().equals(String.valueOf(personas.get(posicion).getPhone()))) validador = true;
+			else validador = false;
+		
+	
+			
+		return validador;
 	}
 
 	
