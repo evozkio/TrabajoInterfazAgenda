@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -37,6 +40,25 @@ public class AgendaController implements Initializable{
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 	public static boolean tipo = false;
 	
+	private final ListChangeListener<Personas> selectorTablaPersonas =
+            new ListChangeListener<Personas>() {
+                @Override
+                public void onChanged(ListChangeListener.Change<? extends Personas> c) {
+                    ponerPersonaseleccionada();
+                }
+            };
+            
+    public static IntegerProperty intProperty = new SimpleIntegerProperty(1024);
+    final ChangeListener<Object> changeListener = new ChangeListener<Object>() {
+      @Override
+      public void changed(ObservableValue<?> observableValue, Object oldValue,
+          Object newValue) {
+        System.out.println("oldValue:"+ oldValue + ", newValue = " + newValue);
+        	int valor = (int) newValue;
+        	focusLista(valor);
+      }
+    };
+
 	
 	
 	@FXML 	private AnchorPane panel;
@@ -122,6 +144,7 @@ public class AgendaController implements Initializable{
 		for (Personas personas : nuevaspersonas) {
 			System.out.println(personas.getFirstName());
 		}
+		personas.addAll(nuevaspersonas);
 	}
 	
 	@FXML
@@ -152,13 +175,7 @@ public class AgendaController implements Initializable{
 
 	
 	
-	private final ListChangeListener<Personas> selectorTablaPersonas =
-            new ListChangeListener<Personas>() {
-                @Override
-                public void onChanged(ListChangeListener.Change<? extends Personas> c) {
-                    ponerPersonaseleccionada();
-                }
-            };
+	
 
    
     public Personas gettableSeleccionada() {
@@ -223,6 +240,9 @@ public class AgendaController implements Initializable{
 		
 		inicializarTablaPersonas();
 		
+		 intProperty.addListener(changeListener);
+		
+		
 	}
 	
 	private void crearVentana(String vista,String Titulo,Boolean bloqueo) throws IOException {
@@ -241,5 +261,14 @@ public class AgendaController implements Initializable{
 			stage.showAndWait();
 			stage.setTitle(Titulo);
 		}
+	
+	public  void focusLista(int valor) {
+		table.requestFocus();
+		table.getSelectionModel().clearSelection();
+		table.getSelectionModel().select(valor);
+		table.getFocusModel().focus(valor);
+	}
+	
+
 	
 }

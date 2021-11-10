@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,19 +49,12 @@ public class buscadorController implements Initializable{
 	private void actionNext(ActionEvent event) {
 		
 		for (int i = this.valor ; i < AgendaController.personas.size(); i++) {
-			if (compararpersona(i,AgendaController.personas)) {
-				AgendaController.table.requestFocus();
-				AgendaController.table.getSelectionModel().clearSelection();
-				AgendaController.table.getSelectionModel().select(i);
-				AgendaController.table.getFocusModel().focus(i);
-				valor = i;
-				break;
-				
+			if (compararpersona(i,AgendaController.personas)){
+						AgendaController.intProperty.setValue(i);
+						this.valor = i;
+						break;
 			}
 		}
-		
-		
-		
 	}
 	
 	
@@ -68,15 +62,11 @@ public class buscadorController implements Initializable{
 	@FXML
 	private void actionBefore(ActionEvent event) {
 		
-		for (int i = this.valor ; i <= 0; i--) {
-			if (compararpersona(i,AgendaController.personas)) {
-				AgendaController.table.requestFocus();
-				AgendaController.table.getSelectionModel().clearSelection();
-				AgendaController.table.getSelectionModel().select(i);
-				AgendaController.table.getFocusModel().focus(i);
-				this.valor = i;
-				break;
-				
+		for (int i = this.valor ; i >=0; i--) {
+			if (compararpersona(i,AgendaController.personas)){
+						AgendaController.intProperty.setValue(i);
+						this.valor = i;
+						break;
 			}
 		}
 	
